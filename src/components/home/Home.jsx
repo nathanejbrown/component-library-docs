@@ -1,20 +1,16 @@
 import { useState } from 'react'
-import { Button, Card, Nav } from 'component-library'
+import { Nav } from 'component-library'
 import './Home.css'
-import { createBrowserRouter, createRoutesFromElements, Route, Outlet, Routes } from 'react-router-dom';
-
-// const appRouter = createBrowserRouter(createRoutesFromElements(
-//   <Route path='/' element={ <App/> }>
-//     <Route path='button' element={ <Button title="test"/> }/>
-//   </Route>
-// ));
+import ComponentDetail from '../ComponentDetail/ComponentDetail'
+import { useLocation } from 'react-router'
+import ComponentDetailConfig from '../../config/component-detail-config'
 
 function Home() {
-  const [count, setCount] = useState(0)
+  let location = useLocation();
 
-  let handleClick = () => {
-    setCount((count) => count + 1)
-  }
+  let pathname = location.pathname.slice(1);
+
+  let componentDetails = ComponentDetailConfig[pathname].description
 
   let navItems = [
     'First',
@@ -22,16 +18,12 @@ function Home() {
     'Third'
   ]
 
-  return (
-    <div className='nav-container2'>
-      <Nav items={navItems}></Nav>
-      <Outlet/>
-      {/* <Button type="submit" title="Button" onClick={handleClick}>
-        <h1>Count: {count}</h1>
-      </Button>
-      <Card title="Look I made a card">
+  console.log('href', window.location.href)
 
-      </Card> */}
+  return (
+    <div className='home-container'>
+      <Nav items={navItems}></Nav>
+      <ComponentDetail details={componentDetails} />
     </div>
   )
 }
