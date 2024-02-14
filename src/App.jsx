@@ -1,23 +1,25 @@
 import { useState } from 'react'
-import { Button, Card } from 'component-library'
+import { Button, Card, Nav } from 'component-library'
 import './App.css'
+import { createBrowserRouter, createRoutesFromElements, Route, Outlet, Routes, BrowserRouter } from 'react-router-dom';
+import Home from './components/home/Home';
+
+const appRouter = createBrowserRouter(createRoutesFromElements(
+  <Route path='/' element={ <App/> }>
+    <Route path='button' element={ <Button/> }/>
+  </Route>
+));
 
 function App() {
-  const [count, setCount] = useState(0)
-
-  let handleClick = () => {
-    setCount((count) => count + 1)
-  }
-
   return (
-    <div className='container'>
-      <Button type="submit" title="Button" onClick={handleClick}>
-        <h1>Count: {count}</h1>
-      </Button>
-      <Card title="Look I made a card">
-
-      </Card>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route path="button" element={<Button title="test" />}></Route>
+          <Route path="card" element={<Card title="Look a card" />}></Route>
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
