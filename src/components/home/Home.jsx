@@ -3,7 +3,7 @@ import './Home.css'
 import ComponentDetail from '../ComponentDetail/ComponentDetail'
 import { useLocation } from 'react-router'
 import ComponentDetailConfig from '../../config/component-detail-config'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Outlet } from 'react-router-dom'
 
 function Home() {
   const navigate = useNavigate();
@@ -22,7 +22,9 @@ function Home() {
   return (
     <div className='home-container'>
       <Nav items={navItems} onClick={handleNavClick}></Nav>
-      <ComponentDetail details={componentDetails} />
+      <ComponentDetail details={componentDetails}>
+        <Outlet />
+      </ComponentDetail>
     </div>
   )
 }

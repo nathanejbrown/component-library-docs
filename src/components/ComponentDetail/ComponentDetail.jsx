@@ -1,8 +1,12 @@
 function ComponentDetail({
-  details
+  details,
+  children
 }) {
   return (
-    <h1>{details}</h1>
+    <div className="detail-container">
+      <h1>{details}</h1>
+      {children}
+    </div>
   )
 }
 
