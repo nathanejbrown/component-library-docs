@@ -1,28 +1,27 @@
-import { useState } from 'react'
 import { Nav } from 'component-library'
 import './Home.css'
 import ComponentDetail from '../ComponentDetail/ComponentDetail'
 import { useLocation } from 'react-router'
 import ComponentDetailConfig from '../../config/component-detail-config'
+import { useNavigate } from 'react-router-dom'
 
 function Home() {
+  const navigate = useNavigate();
+  const handleNavClick = (path) => navigate(path);
   let location = useLocation();
 
   let pathname = location.pathname.slice(1);
 
-  let componentDetails = ComponentDetailConfig[pathname].description
+  let componentDetails = pathname ? ComponentDetailConfig[pathname].description : '';
 
   let navItems = [
-    'First',
-    'Second',
-    'Third'
+    'Button',
+    'Card'
   ]
-
-  console.log('href', window.location.href)
 
   return (
     <div className='home-container'>
-      <Nav items={navItems}></Nav>
+      <Nav items={navItems} onClick={handleNavClick}></Nav>
       <ComponentDetail details={componentDetails} />
     </div>
   )
