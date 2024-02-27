@@ -1,0 +1,5 @@
+const ComponentDetailProps = {
+  "BUTTON": {
+    
+  }
+}

@@ -1,16 +1,35 @@
-function LibraryComponent(componentName) {
-  // Code to return button or card based on name
-  // Update routes to use /components for Component detail, /components/:component as children to get specific component
+import React, { Fragment } from "react"
+
+const componentMap = {
+  BUTTON: React.lazy(() => import('component-library').then(module => {
+    return {default: module.Button}
+  })),
+  CARD: React.lazy(() => import('component-library').then(module => {
+    return {default: module.Card}
+  })),
+  NAV: React.lazy(() => import('component-library').then(module => {
+    return {default: module.Nav}
+  }))
 }
 
 function ComponentDetail({
-  details,
-  children
+  details
 }) {
+  let Component = <Fragment></Fragment>
+
+  let props = {
+    title: "testing"
+  }
+
+  if (details) {
+    Component = componentMap[details.name]
+  }
+  console.log('component', details, Component)
+
   return (
     <div className="detail-container">
-      <h1>{details}</h1>
-      {children}
+      <h1>{details.description}</h1>
+      <Component {...props} />
     </div>
   )
 }
